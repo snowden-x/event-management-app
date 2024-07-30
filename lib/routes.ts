@@ -5,9 +5,6 @@ export const _login = '/auth/login';
 // public
 export const _home = '/';
 export const _events = '/events';
-export const _about = '/about';
-export const _cookies = '/cookies';
-export const _pricing = '/pricing';
 export const _termsandconditions = '/terms-conditions';
 export const _event = (slug: string) => `${_events}/${slug}`;
 export const _attendEvent = (slug: string) => `${_event(slug)}/attend`;
@@ -38,7 +35,7 @@ export const _dashboardProfileEdit = `${_dashboardProfile}/edit`;
 export const _dashboardNotifications = `${_dashboardProfile}/notifications`;
 
 // company
-export const _company = '/company';
-export const _contactUs = '/contact-us';
 export const _terms = '/terms'; 
-export const _privacy = '/privacy';
+export const _about = '/about';
+export const _cookies = '/cookies';
+export const _pricing = '/pricing';

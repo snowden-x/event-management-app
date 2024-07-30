@@ -1,5 +1,5 @@
 import { Provider, SupabaseClient } from "@supabase/supabase-js"
-import { Database } from "./supabase/database.type"
+import { Database, Json } from "./supabase/database.type"
 
 export type QueryProps = {
     params: {[key: string]: string}
@@ -133,6 +133,8 @@ export type FetchedTicketsProps = {
 }
 
 export type FetchedPublicEventsProps = {
+    category: string
+    title: any
     id: string,
     about: string,
     name: string,
@@ -142,7 +144,7 @@ export type FetchedPublicEventsProps = {
     end_at: string,
     start_at: string,
     location: { name: string, school: string, description: string },
-    tags: string[]
+    tags: string[],
     profiles: { avatar_url: string, full_name: string, id: string }
 }
 
@@ -232,4 +234,28 @@ export type FetchedPublicAttendeesProps = {
             start_at: string;
         };
     };
+}
+
+export type FetchedNotificationsProps = {
+    created_at: string,
+    id: string
+    is_read: string
+    message: string,
+    metadata: Json,
+    title: string
+    type: string,
+    user_id: string
+}
+
+export type FetchedInfoNotificationsProps = FetchedNotificationsProps & {
+    metadata: {
+        attendee_id: string,
+        event_id: string
+    },
+};
+
+export type FetchedActionNotificationsProps = FetchedNotificationsProps & {
+    metadata: {
+        member_id: string
+    }
 }

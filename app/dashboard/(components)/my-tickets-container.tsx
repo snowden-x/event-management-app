@@ -17,7 +17,7 @@ export default function MyTicketContainer() {
     }
 
     return (
-        <BodyContent className="flex gap-3  grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+        <BodyContent className=" grid gap-3 md:grid-cols-3 grid-cols-2 lg:grid-cols-4">
             {myTickets?.map((ticket, _id) => (
                 <TicketCard key={_id} {...ticket} />
             ))}

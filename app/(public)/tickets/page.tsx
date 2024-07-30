@@ -44,7 +44,7 @@ export default function Tickets() {
   return (
     <>
       <Header />
-      <main className="main_container flex-1 flex flex-col">
+      <main className="main_container flex-1 flex flex-col bg-gray-50">
         <section className="sub_container py-10 flex flex-col items-center">
           <h1 className="text-xl text-medium text-foreground text-center">Find Your Ticket</h1>
           <p className="text-sm text-muted-foreground max-w-prose text-center mt-1.5">Search for your ticket either by the email or ticket code</p>

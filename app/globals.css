@@ -74,43 +74,12 @@
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInFromBottom {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slideInFromBottom {
-  animation: slideInFromBottom 0.5s ease-out;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-fadeIn,
-  .animate-slideInFromBottom {
-    animation: none;
-  }
-}
-
 @layer base {
   * {
     @apply border-border font-poppins ;
   }
 
-  input:-webkit-autofill,
+  /* input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
@@ -118,7 +87,7 @@
     box-shadow: 0 0 0px 30px white inset;
     -webkit-text-fill-color: inherit;
     caret-color: inherit;
-  }
+  } */
 
   body {
     @apply relative bg-background text-foreground min-h-screen w-full flex flex-col;

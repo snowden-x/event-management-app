@@ -38,7 +38,7 @@ type CustomFieldWrapperProps = CommonProps & {
 
 type TextInputProps = CommonProps & {
     icon?: React.ElementType,
-    placeHolder?: string
+    placeHolder?: string,
 }
 type NumberInputProps = CommonProps & {
     placeHolder?: string,
@@ -370,7 +370,7 @@ export const RadioGroupInput = (props: RadioGroupInputProps) => {
                   defaultValue={field.value}
                   value={field.value}
                   disabled={disabled}
-                  className="flex space-y-0 space-x-1"
+                  className="w-full space-y-0 grid grid-cols-[repeat(3_,112px)] place-content-start gap-1.5"
                 >  
                     {options.map((item, _id) => (
                         <FormItem key={_id} className="relative flex_center space-y-0 w-28 aspect-video rounded-sm border has-[:checked]:bg-muted/20">

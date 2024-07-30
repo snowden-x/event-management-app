@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import Footer from "../(components)/footer";
 import Header from "../(components)/header";
 import { ArrowRight, Box } from "lucide-react";
-import Faqs from "../(components)/faqs";
 import Link from "next/link";
 import { _dashboardEvents } from "@/lib/routes";
 
@@ -60,7 +59,6 @@ export default async function Index() {
         <div className="sub_container">
           <h1 className="font-medium text-xl text-center">Have Any Question About CampusEvents?</h1>
           <div className="w-full mt-7 flex_center">
-            <Faqs />
           </div>
         </div>
       </section>

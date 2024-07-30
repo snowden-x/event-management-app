@@ -71,6 +71,7 @@ export const getMemberEvents = async () => {
         .select('organisation_id')
         .eq('user_id', user.id)
         .eq('is_active', true)
+        .order('updated_at', { ascending: false})
 
     if (orgListError || !dataList) throw new Error("Error fetching events");
 
@@ -106,13 +107,13 @@ export const getEventByID = async ({ id }: { id: string }) => {
 
 export const setEvent = async ({ eventData }: { eventData: NewEvent }) => {
     const { data: { user } } = await supabase.auth.getUser();
-    let { organisation_id, name, headline, capacity, event_type, category, tags, event_date, start_at, end_at, location, banner } = eventData;
+    let { organisation_id, name, headline, about, capacity, event_type, category, tags, event_date, start_at, end_at, location, banner } = eventData;
     if (!user) throw new Error('No user logged in');
 
     const { error } = await supabase
         .from('events')
         .insert({
-            name, organisation_id, capacity, category, headline, event_type,
+            name, organisation_id, capacity, category, headline,about, event_type,
             organiser: user.id,
             tags: stringToList(tags),
             event_date, start_at, end_at, location, banner
@@ -154,13 +155,14 @@ export const deleteEvent = async ({ id }: { id: string }) => {
 // :::::::::::::::::::::::::::: EVENT TICKETS QUERIES ::::::::::::::::::::::::::::::::::::
 export const getEventTickets = async ({ id }: { id: string }) => {
     const { data, error } = await supabase
-        .from('tickets')
-        .select('*')
-        .eq("event_id", id)
+    .from('tickets')
+    .select('*')
+    .eq("event_id", id)
+    .order('updated_at', { ascending: false});
 
     if (error) throw error;
 
-    return data as FetchedTicketsProps[];
+    return data as FetchedTicketsProps[];;
 };
 
 export const setEventTicket = async ({ ticketData }: { ticketData: HandleTicket }) => {
@@ -284,8 +286,10 @@ export const getUserOrganisations = async () => {
             .from('organisation_members')
             .select('profiles (avatar_url)')
             .eq('organisation_id', organisationId)
-            .neq('is_active', false)
-
+            .eq('is_active', true)
+            .eq('has_accepted', true)
+            .order('created_at', { ascending: false})
+    
         if (!members || memberError) throw new Error(memberError?.message || "Error fetching organisations");
 
         return members.map(member => member?.profiles?.avatar_url) as string[];
@@ -387,8 +391,8 @@ export const getMembers = async ({ id }: { id: string }) => {
             id, organisation_id, is_active, has_accepted, 
             profiles(id, full_name, email, avatar_url)
         `)
-        .eq("organisation_id", id)
-        .order('updated_at', { ascending: false })
+    .eq("organisation_id", id)
+    .order('created_at', { ascending: true})
 
     if (error) throw error;
 
@@ -462,35 +466,6 @@ export const getMyTickets = async () => {
     if (error) throw error;
 
     return data as FetchedMyTickets[];
-}
-
-// ::::::::::::::::::::::::::::: FORM NECCESSARY QUERIES ::::::::::::::::::::::::::::::::::
-export const getUserOrgSelect = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (!user) throw new Error('No user logged in');
-
-    const { data, error } = await supabase
-        .from('organisation_members')
-        .select('organisation_id:organisations(value:id, label:name)')
-        .eq('user_id', user.id);
-
-    if (error) throw error;
-
-    const organisations = data.map(member => member.organisation_id)
-
-    return organisations as { value: string; label: string }[];
-}
-
-export const getEventTicketSelect = async ({ id }: { id: string }) => {
-    const { data, error } = await supabase
-        .from('tickets')
-        .select('value:id, label:name')
-        .eq("event_id", id)
-
-    if (error) throw error;
-
-    return data ?? null;
 }
 
 // ::::::::::::::::::::::::::::: PUBLIC QUERIES :::::::::::::::::::::::::::::::::::::::::::
@@ -579,11 +554,12 @@ export const getSearchedTickets = async ({ searchData }: { searchData: string })
     return mappedData as SearchedTicketsProps[];
 }
 
-export const getBookableTickets = async ({ id }: { id: string }) => {
-    const { data, error } = await supabase
-        .from('tickets')
-        .select('id, name, total_tickets, available_tickets, ticket_type, price')
-        .eq('event_id', id);
+export const getBookableTickets = async ({id}:{id: string}) => {
+    const { data, error} = await supabase
+    .from('tickets')
+    .select('id, name, total_tickets, available_tickets, ticket_type, price')
+    .eq('event_id', id)
+    .order('updated_at', { ascending: false});
 
     if (error) throw error;
 
@@ -614,8 +590,119 @@ export const bookTicket = async ({ attendeeData }: { attendeeData: HandleTicketB
 
 
     const { data, error } = await supabase
-        .from('attendees')
-        .insert({ event_id, ticket_id, full_name, email, user_id, has_account, ticket_code, status, payment_status })
+    .from('attendees')
+    .insert({ event_id, ticket_id, full_name, email, user_id, has_account, ticket_code, status, payment_status })
+    .select()
+    .single();
+
+    if(error) throw error;
+
+    return data as FetchedAttendeeProps;
+}
+
+
+// :::::::::::::::::::::::::::::::::::::: NOTIFICATIONS QUERIES ::::::::::::::::::::::::::::::::::
+export const getNotificationCount = async() => {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !userData || !userData.user) {
+        throw new Error('No user logged in');
+    }
+
+    const user = userData.user;
+
+    const { count: allCount, error:allError } = await supabase
+    .from('notifications')
+    .select('*', { count: 'estimated', head: true })
+    .eq('user_id', user.id)
+    .eq('is_read', false);
+
+    const { count: infoCount, error:infoError } = await supabase
+    .from('notifications')
+    .select('*', { count: 'estimated', head: true })
+    .eq('user_id', user.id)
+    .eq('is_read', false)
+    .eq('type', 'info');
+
+    const { count: actionCount, error:actionError } = await supabase
+    .from('notifications')
+    .select('*', { count: 'estimated', head: true })
+    .eq('user_id', user.id)
+    .eq('is_read', false)
+    .eq('type', 'action');
+
+    if(allError || infoError || actionError)
+        throw new Error('Error occured fetching count');
+
+    const data = {
+        all: allCount || 0,
+        info: infoCount || 0,
+        action: actionCount || 0
+    }
+
+    return data;
+}
+
+export const getNotifications = async({tab}:{tab: string}) => {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError || !userData || !userData.user) {
+    throw new Error('No user logged in');
+    }
+
+    const user = userData.user;
+
+    let query = supabase
+    .from('notifications')
+    .select('*')
+    .eq('user_id', user.id)
+    .eq('is_read', false);
+
+    if (tab) {
+        query = query.eq('type', tab);
+    }
+
+    const { data, error } = await query;
+
+    if(error) throw error;
+
+    return data ?? null;
+};
+
+export const modifyNotification = async({id}:{id: string}) => {
+    const { data, error } = await supabase
+    .from('notifications')
+    .update({ is_read: true })
+    .eq('id', id);
+
+    if(error) throw error;
+
+    return data ?? null;
+};
+
+// ::::::::::::::::::::::::::::: FORM NECCESSARY QUERIES ::::::::::::::::::::::::::::::::::
+export const getUserOrgSelect = async () => {
+    const { data: { user }} = await supabase.auth.getUser();
+
+    if (!user) throw new Error('No user logged in');
+
+    const { data, error } = await supabase
+    .from('organisation_members')
+    .select('organisation_id:organisations(value:id, label:name)')
+    .eq('user_id', user.id);
+
+    if (error) throw error;
+
+    const organisations = data.map(member => member.organisation_id)
+
+    return organisations as { value: string; label: string }[];
+}
+
+export const getEventTicketSelect = async ({id}:{id: string}) => {
+    const { data, error } = await supabase
+    .from('tickets')
+    .select('value:id, label:name')
+    .eq("event_id", id)
 
     if (error) throw error;
 
@@ -624,5 +711,29 @@ export const bookTicket = async ({ attendeeData }: { attendeeData: HandleTicketB
 
 export const unbookTicket = () => { };
 
-export const getNotifications = () => { };
 export const updateNotification = () => { };
+export const getMaxCapacity = async ({ id }: { id: string }) => {
+    const { data: event, error: eventError } = await supabase
+    .from('events')
+    .select('capacity')
+    .eq('id', id)
+    .single();
+
+    if (eventError) throw eventError;
+
+    const { data: tickets, error: ticketsError } = await supabase
+    .from('tickets')
+    .select('total_tickets')
+    .eq('event_id', id);
+
+    if (ticketsError) throw ticketsError;
+
+    const totalTickets = tickets.reduce((sum, ticket) => sum + ticket.total_tickets, 0);
+
+    const maxCapacity = {
+        total_capacity: event.capacity || 0,
+        used_capacity: totalTickets || 0,
+    };
+
+    return maxCapacity;
+};

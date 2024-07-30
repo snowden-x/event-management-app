@@ -1,59 +1,101 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { eventCategories } from "@/lib/constants";
+import { EVENT_CATEGORIES } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
-import { CheckListInput, SliderRangeInput, TextInput } from "@/components/common/custom-form-fields";
-import { useForm, useFormContext } from "react-hook-form";
-import { Search } from "lucide-react";
+import { TextInput } from "@/components/common/custom-form-fields";
+import { useForm } from "react-hook-form";
+import { Search, X } from "lucide-react";
 
 const FormSchema = z.object({
     search: z.string(),
-    ticketPrice: z.tuple([z.number(), z.number()]),
     categories: z.array(z.string()),
 });
 
 export type ExploreEventsFilter = z.infer<typeof FormSchema>;
 
-export default function ExploreEventsFilterForm({className}:{className?: string}) {
+export default function ExploreEventsFilterForm({
+    className,
+    onFilterApply
+}: {
+    className?: string;
+    onFilterApply: (data: ExploreEventsFilter) => void;
+}) {
     const form = useForm<ExploreEventsFilter>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
             search: '',
-            ticketPrice: [0, 10000],
             categories: [],
         },
     });
 
-    const {handleSubmit} = form;
+    const { handleSubmit, watch, setValue } = form;
+
+    const searchValue = watch('search');
+    const categories = watch('categories');
 
     function onSubmit(data: ExploreEventsFilter) {
-        toast.success("You submitted the following values:", {
-          description: JSON.stringify(data, null, 2),
-          position: "top-right"
-        })
+        onFilterApply(data);
     }
+
+    const handleCategoryToggle = (category: string) => {
+        const newCategories = categories.includes(category)
+            ? categories.filter(c => c !== category)
+            : [...categories, category];
+        setValue('categories', newCategories);
+        handleSubmit(onSubmit)();
+    };
+
+    const handleReset = () => {
+        form.reset({ search: '', categories: [] });
+        onFilterApply({ search: '', categories: [] });
+    };
 
     return (
         <Form {...form}>
-            <form onSubmit={handleSubmit(onSubmit)} className={cn("w-full space-y-8", className)}>
-                <TextInput name="search" placeHolder="Search" icon={Search} />
-                <SliderRangeInput name="ticketPrice" label="Ticket Price" max={1000} />
-                <CheckListInput name="categories" label="Categories" list={eventCategories.slice(0,10)} />
-                <ActionButtons />
+            <form onSubmit={handleSubmit(onSubmit)} className={cn("w-full space-y-4", className)}>
+                <div className="relative">
+                    <TextInput 
+                        name="search" 
+                        placeHolder="Search events by name, headline, location or description" 
+                        icon={Search}
+                    />
+                    {searchValue && (
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="absolute right-2 top-1/2 -translate-y-1/2"
+                            onClick={() => {
+                                setValue('search', '');
+                                handleSubmit(onSubmit)();
+                            }}
+                        >
+                            <X className="h-4 w-4" />
+                        </Button>
+                    )}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                    {EVENT_CATEGORIES.map(category => (
+                        <Button
+                            key={category.value}
+                            type="button"
+                            className="rounded-full text-xs"
+                            variant={categories.includes(category.value) ? "default" : "outline"}
+                            size="xs"
+                            onClick={() => handleCategoryToggle(category.value)}
+                        >
+                            {category.label}
+                        </Button>
+                    ))}
+                </div>
+                {(searchValue || categories.length > 0) && (
+                    <Button type="button" variant="outline" size="sm" onClick={handleReset}>
+                        Reset All
+                    </Button>
+                )}
             </form>
         </Form>
-    )
-};
-
-const ActionButtons = () => {
-    const { reset, formState: { isDirty }} = useFormContext();
-    return (
-        <div className="mt-7 flex items-center justify-around gap-3 bg-background">
-            <Button type="button" variant='outline' size="xs" disabled={!isDirty} onClick={() => reset()} className="w-full">Reset All</Button>
-            <Button type="submit" size="xs" disabled={!isDirty} className="w-full">Apply</Button>
-        </div>
-    )    
+    );
 }

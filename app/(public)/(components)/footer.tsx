@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import Logo from "@/components/common/logo";
 import { _dashboard, _dashboardTickets, _events, _tickets, _about, _termsandconditions, _cookies } from "@/lib/routes";
 import Link from "next/link";
@@ -19,6 +21,7 @@ const footerLinks = [
             { name: "start an event", link: _dashboard },
             { name: "all your tickets", link: _dashboardTickets },
             { name: "find my ticket", link: _tickets },
+
         ]
     },
     {
@@ -28,6 +31,7 @@ const footerLinks = [
             { name: "team", link: `${_about}#team-section` },
             { name: "pricing", link: "/pricing" },
             { name: "faq", link: `${_about}#faq-section` },
+
         ]
     },
     {

@@ -6,6 +6,7 @@ export const publicKeys = {
     event: (id: string) => [...publicKeys.all, 'event', id] as const,
     attendees: (filters: any) => [...publicKeys.all, 'attendees', filters] as const,
     attendee: (id: string) => [...publicKeys.all, 'attendee', id] as const,
+    createdAttendee: () => [...publicKeys.all, 'attendee', 'created'] as const,
     tickets: (eventID: string) => [...publicKeys.all, 'tickets', eventID] as const,
     searchedTickets: (query: string) => [...publicKeys.all, 'tickets', 'search', query] as const,
     searchedTicket: (id: string) => [...publicKeys.all, 'tickets', 'detail', id] as const,
@@ -15,6 +16,9 @@ export const dashboardKeys = {
     all: ['dashboard'] as const,
     profile: ['profile'] as const,
     authProfile: ['auth-profile'] as const,
+    notifications: (tab: string) => ['notifications', 'tab', tab] as const,
+    notification: (id: string) => ['notifications', id] as const,
+    notificationCount: ['notifications', 'count'] as const,
 
     userOrgSelectList: () => [...dashboardKeys.all, 'org', 'select', 'list'] as const, 
     eventTicketSelect: (id: string) => [...dashboardKeys.all, id, 'ticket', 'select', 'list'] as const, 
@@ -33,4 +37,6 @@ export const dashboardKeys = {
     orgMember: (memberID: string, id: string) => [...dashboardKeys.org(id), 'org-member', memberID] as const,
 
     tickets: () => [...dashboardKeys.all, 'tickets'] as const,
+
+    maxCapacity: (id: string) => [...dashboardKeys.event(id), "capacity"]
 };
