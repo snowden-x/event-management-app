@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { useGetOrganisationByID, useModifyOrganisation } from "@/lib/query-hooks";
 import DeleteHandler from "@/app/dashboard/(components)/delete-handler";
 import { _dashboardOrgs } from "@/lib/routes";
-import { deleteOrganisation, getOrganisationOwner } from "@/lib/queries";
+import { deleteOrganisation} from "@/lib/queries";
 import { useEffect } from "react";
 import { uploadFile } from "@/lib/supabase/upload-file";
 import SpinnerIcon from "../icons/spinner-icon";

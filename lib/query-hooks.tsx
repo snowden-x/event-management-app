@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { bookTicket, deleteEventAttendee, deleteEventTicket, deleteMember, getAuthProfile, getBookableTickets, getEventAttendees, getEventByID, getEventTickets, getEventTicketSelect, getMemberByID, getMemberEvents, getMembers, getMyTickets, getOrganisationByID, getOrganisationEvents, getProfile, getPublicEvent, getPublicEvents, getPublicTicket, getSearchedTickets, getUserOrganisations, getUserOrgSelect, modifyEvent, modifyEventAttendee, modifyEventTicket, modifyMember, modifyOrganisation, modifyProfile, setEvent, setEventAttendee, setEventTicket, setMember, setOrganisation } from "./queries";
+import { acceptMembership, bookTicket, declineMembership, deleteEventAttendee, deleteEventTicket, deleteMember, getAuthProfile, getBookableTickets, getEventAttendees, getEventByID, getEventTickets, getEventTicketSelect, getInvitor, getMaxCapacity, getMemberByID, getMemberEvents, getMembers, getMyTickets, getNotificationCount, getNotifications, getOrganisationByID, getOrganisationEvents, getProfile, getPublicEvent, getPublicEvents, getPublicTicket, getRegistor, getSearchedTickets, getUserOrganisations, getUserOrgSelect, modifyEvent, modifyEventAttendee, modifyEventTicket, modifyMember, modifyNotification, modifyOrganisation, modifyProfile, setEvent, setEventAttendee, setEventTicket, setMember, setOrganisation } from "./queries";
 import { dashboardKeys, publicKeys } from "./query-keys";
 
 export function useGetAuthProfile() {
@@ -70,12 +70,7 @@ export const useGetOrganisationEvents = (id: string) => {
     return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
 }
 
-export const useGetUserOrgSelect = () => {
-    const queryKey = dashboardKeys.userOrgSelectList();
-    const queryFn = async () => await getUserOrgSelect();
 
-    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
-}
 
 // ::::::::::::::::::::: ORGANISATION EVENTS HOOKS :::::::::::::::::::::::
 export const useSetEvent = (id?: string) => {
@@ -157,6 +152,26 @@ export const useGetMemberByID = (memberID: string, id: string) => {
     return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
 }
 
+export const useAcceptMembership = () => {
+    const queryClient = useQueryClient();
+
+    const queryKey = dashboardKeys.notifications;
+    return useMutation({ 
+        mutationFn: acceptMembership,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey })
+    })
+};
+
+export const useDeclineMembership = () => {
+    const queryClient = useQueryClient();
+
+    const queryKey = dashboardKeys.notifications;
+    return useMutation({ 
+        mutationFn: declineMembership,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey })
+    })
+}
+
 // ::::::::::::::::::::: EVENTS TICKET HOOKS ::::::::::::::::::::::::::::::
 export const useGetEventTickets = ( id: string) => {
     const queryKey = dashboardKeys.eventTickets(id);
@@ -213,12 +228,7 @@ export const useSetEventAttendee = (id: string) => {
     }) 
 }
 
-export const useGetEventTicketSelect = (id: string) => {
-    const queryKey = dashboardKeys.eventTicketSelect(id);
-    const queryFn = async () => await getEventTicketSelect({id});
 
-    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
-}
 
 export const useDeleteEventAttendee = (id: string) => {
     const queryClient = useQueryClient();
@@ -291,6 +301,72 @@ export const useGetSearchedTickets = (searchData: string) => {
     const queryKey = publicKeys.searchedTickets(searchData);
     
     const queryFn = async () => await getSearchedTickets({searchData});
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+// :::::::::::::::::::::::::::::: NOTIFICATIONS HOOKS :::::::::::::::::::::::::::::::::::
+export const useGetNotifications = () => {
+    const queryKey = dashboardKeys.notifications;
+    
+    const queryFn = async () => await getNotifications();
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+export const useGetNotificationCount = () => {
+    const queryKey = dashboardKeys.notificationCount;
+    
+    const queryFn = async () => await getNotificationCount();
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+export const useModifyNotification = () => {
+    const queryClient = useQueryClient();
+
+    const queryKey = dashboardKeys.notifications;
+    return useMutation({ 
+        mutationFn: modifyNotification,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey })
+    })
+}
+
+export const useGetInvitor = (id: string) => {
+    const queryKey = dashboardKeys.notificationInvitor(id);
+    
+    const queryFn = async () => await getInvitor({id});
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+export const useGetRegistor = (id: string) => {
+    const queryKey = dashboardKeys.notificationRegistor(id);
+    
+    const queryFn = async () => await getRegistor({id});
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+// :::::::::::::::::::::::::::::: FORM NECCESARY HOOKS ::::::::::::::::::::::::::::::::::
+export const useGetUserOrgSelect = () => {
+    const queryKey = dashboardKeys.userOrgSelectList();
+    const queryFn = async () => await getUserOrgSelect();
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+export const useGetEventTicketSelect = (id: string) => {
+    const queryKey = dashboardKeys.eventTicketSelect(id);
+    const queryFn = async () => await getEventTicketSelect({id});
+
+    return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
+}
+
+export const useGetMaxCapacity = (id: string) => {
+    const queryKey = dashboardKeys.maxCapacity(id);
+    
+    const queryFn = async () => await getMaxCapacity({id});
 
     return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
 }

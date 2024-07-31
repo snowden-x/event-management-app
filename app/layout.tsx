@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "@/components/common/providers";
+import '@/lib/time-ago-setup';
 
 const defaultUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://campusevents.vercel.app/`

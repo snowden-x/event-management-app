@@ -5,6 +5,8 @@ import BodyHeader from "../(components)/body-header";
 import OrganisationsContainer from "../(components)/organisations-container";
 import { ChevronRightIcon } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardOrganisations({ searchParams }: QueryProps) {
   const isOrgFormOpen = searchParams.new as unknown as boolean;
 

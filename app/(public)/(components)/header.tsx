@@ -1,16 +1,18 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { cn, parseNavigation } from "@/lib/utils";
-import { useGetAuthProfile } from "@/lib/query-hooks";
-import { NavigationProps } from "@/lib/types";
 import { _dashboard, _events, _home, _login, _tickets } from "@/lib/routes";
 import Logo from "@/components/common/logo";
 import MobileNavigation from "@/components/common/mobile-navigation";
 import Notifications from "@/components/common/notification-button";
 import ProfileAvatar from "@/components/common/profile-avatar";
 import { Button } from "@/components/ui/button";
+import { useGetAuthProfile } from "@/lib/query-hooks";
+import { createClient } from "@/lib/supabase/client";
+import { NavigationProps } from "@/lib/types";
+import { cn, parseNavigation } from "@/lib/utils";
+import { User } from "@supabase/supabase-js";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navLinks = [
     { name: "events", link: _events, active: false },
@@ -56,8 +58,20 @@ const Header = () => {
 };
 
 const HeaderOptions = () => {
-    const { data: user } = useGetAuthProfile();
+    const supabase = createClient();
+    const [user, setUser] = useState<User | null>(null);
     const [open, setOpen] = useState(false);
+
+    useEffect(()=> {
+        const getUser = async() => {
+            const { data: { user: authUser }, error} = await supabase.auth.getUser();
+            
+            if(error) setUser(null);
+            else setUser(authUser);
+        };
+
+        getUser();
+    }, []);
 
     return (
         <div className="flex gap-1.5 items-center">

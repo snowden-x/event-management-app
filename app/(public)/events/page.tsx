@@ -6,6 +6,8 @@ import EevntsContainerV from "../(components)/events-container-v";
 import EventsHeaderV from "../(components)/events-header-v";
 import Footer from "../(components)/footer";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Events() {
   return (
     <>

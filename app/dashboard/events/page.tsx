@@ -5,6 +5,8 @@ import BodyHeader from "../(components)/body-header";
 import EventsContainer from "../(components)/events-container";
 import { ChevronRightIcon } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardEvents({ searchParams }: QueryProps) {
   const isEventFormOpen = searchParams.new as unknown as boolean;
 

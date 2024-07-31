@@ -33,7 +33,7 @@ import {
 
 import {
     _home, _dashboard, _dashboardEvents, _dashboardOrgs, _dashboardTickets,
-    _dashboardProfile, _dashboardProfileEdit, _login, _dashboardNotifications
+    _dashboardProfile, _dashboardProfileEdit, _login
 } from "@/lib/routes";
 
 const navLinks = [
@@ -52,7 +52,6 @@ const navLinks = [
         icon: User,
         items: [
             { name: "View Profile", link: _dashboardProfileEdit },
-            { name: "Notifications", link: _dashboardNotifications },
         ]
     },
 ];
