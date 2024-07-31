@@ -56,9 +56,9 @@ export default function EevntsContainerV() {
     return (
         <div className="w-full space-y-4">
             <ExploreEventsFilterForm onFilterApply={handleFilterApply} />
-            <ScrollArea className="h-[calc(100vh-200px)]">
+            <ScrollArea className="h-[calc(100vh-20px)] ">
                 {filteredEvents && filteredEvents.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:my-20 mx-2 lg:mx-9 ">
                         {filteredEvents.map((event) => (
                             <EventCard capacity={0} created_at={''} event_status={''} event_type={''} is_published={false} organisation_id={''} organiser={''} tickets={[]} updated_at={''} agenda={null} faq={null} key={event.id} {...event} />
                         ))}

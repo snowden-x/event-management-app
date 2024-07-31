@@ -30,9 +30,9 @@ export default function EventsContainer() {
     const sortedEvents = events?.slice().sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
 
     return (
-        <div className="w-full mr-3">
-            <ScrollArea className="lg:max-w-[calc(100vw-40rem)] max-w-[calc(100vw-2rem)]">
-                <div className="w-full flex gap-x-1.5 gap-y-3">
+        <div className="w-full rounded-lg  ">
+            <ScrollArea className="lg:max-w-[calc(100vw-30rem)] max-w-[calc(100vw-2rem)]">
+                <div className="w-full flex gap-x-1.5 gap-y-3 mx-3 my-4 rounded-sm">
                     {sortedEvents?.map((event, _id) => (
                         <EventCard capacity={0} created_at={""} event_status={""} event_type={""} is_published={false} organisation_id={""} organiser={""} tickets={[]} updated_at={""} agenda={null} faq={null} key={_id} {...event} />
                     ))}
