@@ -1,4 +1,3 @@
-import Faqs from "../(components)/faqs";
 import AboutProject from '../(components)/about-project';
 import { Badge } from "@/components/ui/badge";
 
@@ -122,9 +121,6 @@ export default function Page() {
             <section id="faq-section" className="main_container py-16">
                 <div className="sub_container">
                     <h1 className="font-semibold text-2xl text-center text-green-700">FAQs</h1>
-                    <div className="w-full mt-7 flex_center p-0 m-0">
-                        <Faqs />
-                    </div>
                 </div>
             </section>
         </div>
