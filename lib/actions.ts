@@ -8,7 +8,7 @@ import { _login } from "./routes";
 
 export const signInWithOAuth = async (provider: Provider) =>  {
   const origin = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://campusevents.vercel.app`
+  ? `https://event-management-app-jet.vercel.app/`
   : "http://localhost:3000";
 
   const supabase = createClient();

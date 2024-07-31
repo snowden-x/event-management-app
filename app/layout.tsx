@@ -5,7 +5,7 @@ import { Providers } from "@/components/common/providers";
 import '@/lib/time-ago-setup';
 
 const defaultUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://campusevents.vercel.app/`
+  ? `https://event-management-app-jet.vercel.app/`
   : "http://localhost:3000";
 
 export const metadata:Metadata = {
