@@ -70,8 +70,6 @@ export const useGetOrganisationEvents = (id: string) => {
     return useQuery({queryKey, queryFn, refetchOnWindowFocus: false});
 }
 
-
-
 // ::::::::::::::::::::: ORGANISATION EVENTS HOOKS :::::::::::::::::::::::
 export const useSetEvent = (id?: string) => {
     const queryClient = useQueryClient();
@@ -228,8 +226,6 @@ export const useSetEventAttendee = (id: string) => {
     }) 
 }
 
-
-
 export const useDeleteEventAttendee = (id: string) => {
     const queryClient = useQueryClient();
 
@@ -286,7 +282,10 @@ export const useBookTicket = () => {
     const queryKey = publicKeys.events();
     return useMutation({ 
         mutationFn: bookTicket,
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKey })
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: queryKey });
+            return data;
+        }
     })
 }
 

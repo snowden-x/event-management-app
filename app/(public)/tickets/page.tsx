@@ -97,8 +97,9 @@ const SearchedTicketsContainer = ({ searchedTickets }: { searchedTickets: any })
                 <Image
                   src={ticket.banner}
                   alt="Event image"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fill"
                   fill
+
                 />
               </div>
 

@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { useController, useFieldArray, useFormContext } from "react-hook-form";
 import { Slider } from "../ui/slider";
 import { Checkbox } from "../ui/checkbox";
-import { Check, ChevronsUpDown, PlusCircle, Trash, UploadCloud } from "lucide-react";
+import { Check, ChevronDown, ChevronsUpDown, PlusCircle, Search, Trash, UploadCloud, User } from "lucide-react";
 import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -38,7 +38,7 @@ type CustomFieldWrapperProps = CommonProps & {
 
 type TextInputProps = CommonProps & {
     icon?: React.ElementType,
-    placeHolder?: string,
+    placeHolder?: string
 }
 type NumberInputProps = CommonProps & {
     placeHolder?: string,
@@ -497,13 +497,17 @@ export const SwitchInput = (props: SwitchInputProps) => {
         
 };
 
+
 export const SelectUserInput = (props: SelectUserInputProps) => {
     const { name, label, description, showError, disabled = false } = props;
     const wrapperProps = { name, label, description, showError };
     const { field } = useController({ name });
     const [search, setSearch] = useState('');
     const [users, setUsers] = useState<{ id: string; full_name: string; email: string; }[]>([]);
+    const [selectedUser, setSelectedUser] = useState<{ id: string; full_name: string; email: string } | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     const supabase = createClient();
 
@@ -533,48 +537,91 @@ export const SelectUserInput = (props: SelectUserInputProps) => {
         }
     }, [search, fetchUsers]);
 
+    useEffect(() => {
+        if (isDropdownOpen && searchInputRef.current) {
+            searchInputRef.current.focus();
+        }
+    }, [isDropdownOpen]);
+
     const handleSelect = (value: string) => {
-        const selectedUser = users.find(user => user.id === value);
-        if (selectedUser) {
+        const selected = users.find(user => user.id === value);
+        if (selected) {
             field.onChange(value);
+            setSelectedUser(selected);
+            setSearch('');
+            setIsDropdownOpen(false);
         }
     };
 
     return (
-        <CustomFieldWrapper { ...wrapperProps }>
-            <Popover>
-                <PopoverTrigger asChild>
-                    <FormControl>
-                        <Button variant="outline" role="combobox" className={cn("w-full justify-between", !field.value && "text-muted-foreground")} disabled={disabled}>
-                            {field.value ? users.find(user => user.id === field.value)?.full_name || "Select user" : "Select user"}
-                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                    </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-full max-w-96 min-w-80 p-0">
-                    <Command shouldFilter={false}>
-                        <CommandInput placeholder="Search by name or email..." value={search} onValueChange={(value) => setSearch(value)} />
-                        <CommandList>
-                            {isLoading && <CommandEmpty>Loading...</CommandEmpty>}
-                            {!isLoading && users.length === 0 && <CommandEmpty>No Users Found</CommandEmpty>}
-                            {!isLoading && users.length > 0 && (
-                                <CommandGroup>
-                                    {users.map(user => (
-                                        <CommandItem key={user.id} value={user.id} onSelect={() => handleSelect(user.id)}>
-                                            <Check className={cn("mr-2 h-4 w-4", user.id === field.value ? "opacity-100" : "opacity-0")} />
-                                            {user.email}
-                                        </CommandItem>
-                                    ))}
-                                </CommandGroup>
-                            )}
-                        </CommandList>
-                    </Command>
-                </PopoverContent>
-            </Popover>
-        </CustomFieldWrapper>
+        <div {...wrapperProps} className="relative font-sans">
+            {label && (
+                <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">
+                    {label}
+                </label>
+            )}
+            <div className="relative">
+                <button
+                    type="button"
+                    className={`w-full flex justify-between items-center px-4 py-2.5 border rounded-lg shadow-sm transition-all duration-200 ease-in-out
+                        ${!field.value ? 'text-gray-500' : 'text-black'}
+                        ${disabled ? 'cursor-not-allowed bg-gray-100' : 'bg-white hover:bg-gray-50'}`}
+                    disabled={disabled}
+                    onClick={() => setIsDropdownOpen(prev => !prev)}
+                >
+                    <span className="flex items-center text-black">
+                        <User className="w-5 h-5 mr-2 text-gray-400" />
+                        <span className="text-base">{selectedUser ? selectedUser.full_name : "Select User"}</span>
+                    </span>
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                </button>
+            </div>
+            {isDropdownOpen && (
+                <div className="absolute z-10 w-full mt-1 bg-white rounded-md shadow-lg">
+                    <div className="relative">
+                        <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                        <input
+                            type="text"
+                            placeholder="Search by name or email..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            ref={searchInputRef}
+                            className="w-full pl-10 pr-4 py-2.5 border-b border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary-foreground transition-all duration-200 ease-in-out"
+                        />
+                    </div>
+                    <ul className="max-h-60 overflow-auto py-1">
+                        {isLoading && <li className="px-4 py-2 text-gray-500">Loading...</li>}
+                        {!isLoading && users.length === 0 && <li className="px-4 py-2 text-gray-500">No Users Found</li>}
+                        {!isLoading && users.length > 0 && (
+                            <>
+                                {users.map(user => (
+                                    <li
+                                        key={user.id}
+                                        className={`px-4 py-2 cursor-pointer flex items-center justify-between
+                                            ${user.id === field.value ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-100'}`}
+                                        onClick={() => handleSelect(user.id)}
+                                    >
+                                        <div>
+                                            <p className="font-medium">{user.full_name}</p>
+                                            <p className="text-sm text-gray-500">{user.email}</p>
+                                        </div>
+                                        {user.id === field.value && <Check className="w-5 h-5 text-blue-500" />}
+                                    </li>
+                                ))}
+                            </>
+                        )}
+                    </ul>
+                </div>
+            )}
+            {description && (
+                <p className="mt-1 text-sm text-gray-500">{description}</p>
+            )}
+            {showError && (
+                <p className="mt-1 text-sm text-red-600">{showError}</p>
+            )}
+        </div>
     );
 };
-
 export const RadioSelectInput = () => {};
 
 export const SliderInput = () => {};
