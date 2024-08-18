@@ -11,19 +11,23 @@ export const dynamic = 'force-dynamic';
 export default async function Events() {
   return (
     <>
-      <Header />
-      <main className="main_container events_page_h bg-gray-50 ">
-        <div className="sub_container flex min-h-full py-7 gap-5">
-          <section className="flex-1">
-            <EventsHeader />
-            <EevntsContainer/>
-            <br></br>
-            <br></br>
-            <EventsHeaderV />
-            <EevntsContainerV/>
-          </section>
-        </div>
-      </main>
+      <div className="bg-image">
+        <Header />
+        <main className="main_container events_page_h bg-transparent ">
+          <div className="sub_container flex min-h-full py-7 gap-5">
+            <section className="flex-1">
+              <EventsHeader />
+              <EevntsContainer />
+              <br></br>
+              <br></br>
+              <EventsHeaderV />
+              <EevntsContainerV />
+            </section>
+          </div>
+        </main>
+
+      </div>
+
       <Footer />
     </>
   );

@@ -17,6 +17,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { CardDescription, CardHeader } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { SearchedTicketsProps } from "@/lib/types";
 
 const FormSchema = z.object({
   query: z.string().min(1, "Must enter a query"),
@@ -44,7 +45,7 @@ export default function Tickets() {
   return (
     <>
       <Header />
-      <main className="main_container flex-1 flex flex-col bg-gray-50">
+      <main className="main_container flex-1 flex flex-col bg-gray-50 dark:bg-zinc-900 ">
         <section className="sub_container py-10 flex flex-col items-center">
           <h1 className="text-xl text-medium text-foreground text-center">Find Your Ticket</h1>
           <p className="text-sm text-muted-foreground max-w-prose text-center mt-1.5">Search for your ticket either by the email or ticket code</p>
@@ -58,7 +59,7 @@ export default function Tickets() {
         <section className="sub_container py-0">
           {
             isLoading ?
-              (<Loading />) :
+              (<Loading />) : search === "" ? null :
               searchedTickets && searchedTickets.length > 0 ?
                 (<SearchedTicketsContainer searchedTickets={searchedTickets} />) :
                 (<EmptyContainer />)
@@ -82,16 +83,16 @@ const EmptyContainer = () => (
   </div>
 )
 
-const SearchedTicketsContainer = ({ searchedTickets }: { searchedTickets: any }) => {
+const SearchedTicketsContainer = ({ searchedTickets }: { searchedTickets: SearchedTicketsProps[] }) => {
   return (
     <>
       <ScrollArea className="mt-0 lg:max-w-[calc(100vw-40rem)] max-w-[calc(100vw-2rem)]">
         <div className="w-full flex py-2 justify-start">
           {searchedTickets.map((ticket: any) => (
-            <div key={ticket.id} className="w-60  mx-4 bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md relative">
+            <div key={ticket.id} className="w-60  mx-4 bg-white dark:bg-zinc-950 shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-md relative">
               {/* Semi-circles on sides */}
-              <div className="absolute left-0 top-1/2 w-5 h-10 rounded-r-full shadow-inner mt-1  bg-gray-100"></div>
-              <div className="absolute right-0 top-1/2 w-5 h-10 rounded-l-full shadow-inner mt-1 bg-gray-100"></div>
+              <div className="absolute left-0 top-1/2 w-5 h-10 rounded-r-full shadow-inner mt-1  bg-gray-100 dark:bg-zinc-800"></div>
+              <div className="absolute right-0 top-1/2 w-5 h-10 rounded-l-full shadow-inner mt-1 bg-gray-100 dark:bg-zinc-800"></div>
 
               <div className="relative h-48">
                 <Image
@@ -119,12 +120,12 @@ const SearchedTicketsContainer = ({ searchedTickets }: { searchedTickets: any })
                 </div>
 
                 <div className="mb-4">
-                  <CardDescription className="font-medium font-roboto-mono text-blue-600 text-center truncate">{ticket.name}</CardDescription>
+                  <CardDescription className="font-medium font-roboto-mono text-blue-600 dark:text-blue-200 text-center truncate">{ticket.name}</CardDescription>
                 </div>
 
                 <div className="mt-4">
                   <Link href={_ticket(ticket.id)}>
-                    <Button className="w-full rounded-lg font-roboto-mono bg-teal-500 text-white" variant={"default"}>View Ticket</Button>
+                    <Button className="w-full rounded-lg font-roboto-mono bg-emerald-500 text-white dark:hover:hover:bg-emerald-400" variant={"default"}>View Ticket</Button>
 
                   </Link>
                   <p className="text-center text-sm font-light mt-1"># <span className=" font-roboto-mono font-semibold">{ticket.ticket_code}</span></p>

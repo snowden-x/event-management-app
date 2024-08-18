@@ -23,7 +23,7 @@ function AttendHeader() {
                 <X className="text-muted-foreground group-hover:text-foreground" />
             </Button>
             <div className="flex-1 flex_center">
-                <h3 className="text-base md:text-lg font-normal text-muted-foreground">Attend this event now</h3>
+                <h3 className="text-base md:text-lg font-normal text-muted-foreground capitalize">Attend event </h3>
             </div>
         </div>
     )

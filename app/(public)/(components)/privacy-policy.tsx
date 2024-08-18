@@ -4,28 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const PrivacyPolicy: React.FC = () => {
     return (
         <div className="container mx-auto px-4 py-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Privacy Policy</h2>
-            <Card className="mb-8 border-blue-200 shadow-lg">
+            <h2 className="text-3xl font-bold text-center mb-8 text-accent">Privacy Policy</h2>
+            <Card className="mb-8 border-accent shadow-lg">
                 <CardHeader>
-                    <CardTitle className="text-2xl text-center font-semibold text-blue-600">Our Commitment to Privacy</CardTitle>
+                    <CardTitle className="text-2xl text-center font-semibold text-accent">Our Commitment to Privacy</CardTitle>
                 </CardHeader>
                 <CardContent className="lg:text-left text-center">
-                    <p className="text-lg font-semibold italic text-gray-600">
+                    <p className="text-lg font-semibold italic text-muted-foreground">
                         Last updated: July 24, 2024
                     </p>
-                    <p className="mt-4 text-gray-700">
+                    <p className="mt-4 text-muted-foreground">
                         We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data and tell you about your privacy rights.
                     </p>
                 </CardContent>
             </Card>
 
             <div className="space-y-8">
-                <div className="p-3 lg:p-6 bg-white rounded-lg shadow-sm">
-                    <h3 className="text-xl font-semibold text-blue-600 mb-4">Information We Collect</h3>
-                    <p className="text-gray-700">
+                <div className="p-3 lg:p-6 bg-background rounded-lg shadow-sm">
+                    <h3 className="text-xl font-semibold text-accent mb-4">Information We Collect</h3>
+                    <p className="text-muted-foreground">
                         We may collect, use, store and transfer different kinds of personal data about you, including:
                     </p>
-                    <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                    <ul className="list-disc list-inside mt-2 space-y-1 text-muted-foreground">
                         <li>Identity Data</li>
                         <li>Contact Data</li>
                         <li>Technical Data</li>
@@ -33,12 +33,12 @@ const PrivacyPolicy: React.FC = () => {
                     </ul>
                 </div>
 
-                <div className="p-3 lg:p-6 bg-white rounded-lg shadow-sm">
-                    <h3 className="text-xl font-semibold text-blue-600 mb-4">How We Use Your Information</h3>
-                    <p className="text-gray-700">
+                <div className="p-3 lg:p-6 bg-background rounded-lg shadow-sm">
+                    <h3 className="text-xl font-semibold text-accent mb-4">How We Use Your Information</h3>
+                    <p className="text-muted-foreground">
                         We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:
                     </p>
-                    <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                    <ul className="list-disc list-inside mt-2 space-y-1 text-muted-foreground">
                         <li>To provide and maintain our service</li>
                         <li>To notify you about changes to our service</li>
                         <li>To provide customer support</li>
@@ -46,19 +46,19 @@ const PrivacyPolicy: React.FC = () => {
                     </ul>
                 </div>
 
-                <div className="p-3 lg:p-6 bg-white rounded-lg shadow-sm">
-                    <h3 className="text-xl font-semibold text-blue-600 mb-4">Data Security</h3>
-                    <p className="text-gray-700">
+                <div className="p-3 lg:p-6 bg-background rounded-lg shadow-sm">
+                    <h3 className="text-xl font-semibold text-accent mb-4">Data Security</h3>
+                    <p className="text-muted-foreground">
                         We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed.
                     </p>
                 </div>
 
-                <div className="p-3 lg:p-6 bg-white rounded-lg shadow-sm">
-                    <h3 className="text-xl font-semibold text-blue-600 mb-4">Your Legal Rights</h3>
-                    <p className="text-gray-700">
+                <div className="p-3 lg:p-6 bg-background rounded-lg shadow-sm">
+                    <h3 className="text-xl font-semibold text-accent mb-4">Your Legal Rights</h3>
+                    <p className="text-muted-foreground">
                         Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:
                     </p>
-                    <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                    <ul className="list-disc list-inside mt-2 space-y-1 text-muted-foreground">
                         <li>Request access to your personal data</li>
                         <li>Request correction of your personal data</li>
                         <li>Request erasure of your personal data</li>

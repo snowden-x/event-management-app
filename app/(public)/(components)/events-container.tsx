@@ -30,7 +30,7 @@ export default function EventsContainer() {
     const sortedEvents = events?.slice().sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
 
     return (
-        <div className="w-full rounded-lg  ">
+        <div className="w-full rounded-lg ">
             <ScrollArea className="lg:max-w-[calc(100vw-30rem)] max-w-[calc(100vw-2rem)]">
                 <div className="w-full flex gap-x-1.5 gap-y-3 mx-3 my-4 rounded-sm">
                     {sortedEvents?.map((event, _id) => (

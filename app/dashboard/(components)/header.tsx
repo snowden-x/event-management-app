@@ -85,7 +85,7 @@ export default function Sidepanel() {
         <>
             <div className="flex items-center mb-5">
                 <Logo className='hidden' />
-                <span className="ml-2 text-xl text-center text-red-500 font-semibold">CONNECT</span>
+                <span className="ml-2 text-xl text-center text-primary font-semibold">CONNECT</span>
             </div>
 
             <div className="mb-6">
@@ -105,7 +105,7 @@ export default function Sidepanel() {
                                 <AccordionItem value={item.name}>
                                     <AccordionTrigger className="py-2 px-3 rounded-lg hover:bg-secondary">
                                         <div className="flex items-center">
-                                            <item.icon className="mr-2 h-4 w-4" />
+                                            <item.icon className="mr-2 h-4 w-4 text-primary" />
                                             <span>{item.name}</span>
                                         </div>
                                     </AccordionTrigger>

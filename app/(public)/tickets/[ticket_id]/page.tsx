@@ -47,10 +47,10 @@ const TicketDetail = ({attendee}:{attendee: FetchedPublicAttendeesProps}) => {
       <TicketDetailComponent header="Ticket Holder Information">
         <div className="w-full flex gap-6 md:gap-4 flex-col md:flex-row">
           <div className="flex-1 grid grid-cols-2 gap-6">
-            <DetailCard header="Full Name" value={full_name} className="overflow-hidden truncate" />
-            <DetailCard header="Email" value={email} />
-            <DetailCard header="Ticket Code" value={ticket_code} />
-            <DetailCard header="Ticket Name" value={ticketName} />
+            <DetailCard header="Full Name" value={full_name} className="overflow-hidden truncate text-xs" />
+            <DetailCard header="Email" className="text-xs" value={email} />
+            <DetailCard header="Ticket Code" className="text-xs" value={ticket_code} />
+            <DetailCard header="Ticket Name"className="text-xs" value={ticketName} />
           </div>
           <div className="flex-1 h-full flex_center justify-start md:justify-center">
             <QRCodeGenerator value={ticket_code} size={200} />

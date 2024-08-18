@@ -33,27 +33,30 @@ const Header = () => {
     }, [pathname]);
 
     return (
-        <header className="sticky bg-background main_container top-0 left-0 z-10 h-14 border-b flex_center justify-between pl-3 max-lg:pr-1.5 pr-3">
-            <div className="flex gap-1 items-center">
-                <Logo className="hidden" />
-                <Link href={_home} className="text-lg font-semibold text-red-500">CONNECT</Link>
-            </div>
-            <nav className="hidden md:flex items-center bg-gray-100 rounded-full p-1">
-                {content.map(({ name, link, active }, _i) => (
-                    <Link
-                        key={_i}
-                        href={link}
-                        className={cn(
-                            "px-4 py-2 rounded-full font-medium text-sm capitalize transition-all duration-300 ease-in-out",
-                            active ? "bg-red-500 text-white" : "hover:bg-gray-200"
-                        )}
-                    >
-                        {name}
-                    </Link>
-                ))}
-            </nav>
-            <HeaderOptions />
-        </header>
+        <div className="lg:mx-11 lg:my-7 lg:rounded-xl shadow-sm top-0 sticky z-50">
+            <header className="sticky bg-gray-50/50 backdrop-blur-xl main_container top-0 left-0 z-10 h-14 border rounded-xl border-border/50 flex_center justify-between pl-3 max-lg:pr-1.5 pr-3 shadow-lg">
+                <div className="flex gap-1 items-center">
+                    <Logo className="hidden" />
+                    <Link href={_home} className="text-lg font-semibold text-black">CONNECT</Link>
+                </div>
+                <nav className="hidden md:flex items-center bg-gray-200 rounded-full p-1">
+                    {content.map(({ name, link, active }, _i) => (
+                        <Link
+                            key={_i}
+                            href={link}
+                            className={cn(
+                                "px-4 py-2 rounded-full font-medium text-sm capitalize transition-all duration-300 ease-in-out",
+                                active ? "bg-gray-800 text-white dark:bg-gray-50 dark:text-black" : "hover:bg-gray-800 dark:hover:bg-gray-50 dark:text-black hover:mx-2 hover:text-white"
+                            )}
+                        >
+                            {name}
+                        </Link>
+                    ))}
+                </nav>
+                <HeaderOptions />
+            </header>
+        </div>
+
     );
 };
 
@@ -62,11 +65,11 @@ const HeaderOptions = () => {
     const [user, setUser] = useState<User | null>(null);
     const [open, setOpen] = useState(false);
 
-    useEffect(()=> {
-        const getUser = async() => {
-            const { data: { user: authUser }, error} = await supabase.auth.getUser();
-            
-            if(error) setUser(null);
+    useEffect(() => {
+        const getUser = async () => {
+            const { data: { user: authUser }, error } = await supabase.auth.getUser();
+
+            if (error) setUser(null);
             else setUser(authUser);
         };
 
@@ -109,7 +112,10 @@ const ActionButtons = ({ isMobile = false, onClick = () => null }: { isMobile?: 
                     key={_id}
                     variant={variant as "outline" | "default"}
                     size='sm'
-                    className={cn(!isMobile && "rounded-lg")}
+                    className={cn(
+                        !isMobile && "rounded-lg",
+                        variant === "default" ? "bg-black dark:bg-white dark:text-black text-white dark:hover:bg-black dark:hover:text-white " : "dark:bg-black bg-white dark:border-black dark:text-white text-black border"
+                    )}
                     onClick={() => handleClick(link)}
                 >
                     {name}

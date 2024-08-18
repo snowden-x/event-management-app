@@ -135,8 +135,8 @@ export default function HandleTicketBookingForm({ eventID }: { eventID: string }
                             <TicketCheck strokeWidth={1} className="size-32 text-muted-foreground" />
                         </div>
                         <div className="w-full flex-1 py-5 space-y-4">
-                            <h2 className="mx-auto max-w-prose text-2xl font-semibold text-foreground text-center">Congratulations !!</h2>
-                            <p className="text-xl font-medium mx-auto w-full text-center">{createdAttendee?.full_name}</p>
+                            <h2 className="mx-auto max-w-prose text-2xl font-semibold text-foreground font-roboto-mono text-center">Thank You.</h2>
+                            <p className="text-xl font-medium mx-auto w-full text-center capitalize">{createdAttendee?.full_name}</p>
                             <p className="text-lg font-normal text-muted-foreground text-center">You are attending this event</p>
                         </div>
                         <div className="w-full pt-4 flex_center">

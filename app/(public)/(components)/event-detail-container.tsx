@@ -10,11 +10,11 @@ import NextImage from "next/image";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function EventDetailContainer({eventID}:{eventID:string}) {
-    const { data: event, isLoading} = useGetPublicEvent(eventID);
+export default function EventDetailContainer({ eventID }: { eventID: string }) {
+    const { data: event, isLoading } = useGetPublicEvent(eventID);
     const date = dateAvatar(event?.event_date || "");
 
-    if(isLoading) {
+    if (isLoading) {
         return (
             <section className="sub_container flex_center w-full h-80">
                 <SpinnerIcon className="size-10 text-secondary-foreground" />
@@ -38,7 +38,7 @@ export default function EventDetailContainer({eventID}:{eventID:string}) {
                         </div>
                     </div>
                     <div className="h-full flex_center justify-start md:justify-center">
-                        <Link href={_attendEvent(eventID)} className="px-5 h-12 flex_center rounded-sm text-sm text-primary-foreground font-medium bg-primary hover:bg-primary/80">
+                        <Link href={_attendEvent(eventID)} className="px-5 h-12 flex_center rounded-2xl text-sm text-primary-foreground font-medium bg-primary hover:bg-primary/80">
                             Attend Event
                         </Link>
                     </div>
@@ -55,13 +55,34 @@ export default function EventDetailContainer({eventID}:{eventID:string}) {
                 <TabsContent value="overview">
                     <div className="sub_container space-y-7 py-7">
                         <div className="overflow-hidden relative z-0 w-full max-w-screen-md aspect-video bg-muted rounded-lg">
-                            {event && event.banner ? 
-                                (<NextImage src={event.banner} alt={event.name} fill className='object-fill' />):
+                            {event && event.banner ?
+                                (<NextImage src={event.banner} alt={event.name} fill className='object-cover' />) :
                                 (<Image className='size-7 text-muted-foreground' />)
                             }
                         </div>
-                        <div className="w-full">
-                            <p className="text-muted-foreground text-base whitespace-pre-wrap">{event?.about}</p>
+                        <div className="flex flex-col border rounded-lg p-7 bg-gray-100 dark:bg-zinc-900 space-y-2">
+                            <div className="flex items-center">
+                                <span className="font-roboto-mono font-bold text-base">Location:</span>
+                            </div>
+                            <div className="space-y-1">
+                                {event?.location?.school && (
+                                    <p className="text-base font-roboto-mono font-normal tracking-tight text-secondary-foreground/80 capitalize">{event.location.school}</p>
+                                )}
+                                {event?.location?.name && (
+                                    <p className="text-base font-roboto-mono font-normal tracking-tight text-secondary-foreground/80 capitalize">{event.location.name}</p>
+                                )}
+                                {event?.location?.description && (
+                                    <p className="text-base font-roboto-mono font-normal tracking-tight text-secondary-foreground/80 capitalize">{event.location.description}</p>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="w-full border p-7 rounded-lg bg-gray-100 dark:bg-zinc-900">
+                            <div className="flex items-center">
+                                <span className="font-roboto-mono font-bold text-base mb-4">Event Description:</span>
+                            </div>
+                            <p className="text-muted-foreground text-base whitespace-pre-wrap font-roboto-mono">{event?.about}</p>
+
                         </div>
                     </div>
                 </TabsContent>
@@ -80,6 +101,6 @@ export default function EventDetailContainer({eventID}:{eventID:string}) {
                     </div>
                 </TabsContent>
             </Tabs>
-      </main>
+        </main>
     )
 };

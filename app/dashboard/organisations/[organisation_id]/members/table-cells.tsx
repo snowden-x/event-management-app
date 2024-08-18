@@ -98,7 +98,7 @@ const Email = ({ email }: { email: string }) => {
 
 const Status = ({ status, hasAccepted }:{ status: boolean, hasAccepted: boolean}) => (
     <div className="w-full flex flex-start">
-        <p className="text-sm font-medium px-2 py-1 rounded-full bg-secondary">
+        <p className="text-sm font-medium px-2 py-1 rounded-full capitalize bg-secondary">
             {status? "active": hasAccepted? "suspended" : "invited"}
         </p>
     </div>
