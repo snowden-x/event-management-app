@@ -118,7 +118,7 @@ export default function Component() {
         setTimeout(() => {
             setMatchResult(null)
             setQrData("")
-        }, 1000)
+        }, 1300)
     }
 
     useEffect(() => {
@@ -253,6 +253,36 @@ export default function Component() {
                         </CardContent>
                     </Card>
                 )}
+                {matchResult && (
+                    <Card className="shadow mb-4">
+                        <CardContent className="pt-6">
+                            <Alert
+                                variant={matchResult === "yes" ? "default" : "destructive"}
+                                className={`${matchResult === "yes" ? "bg-green-100 border-green-400" : ""} transition-all duration-300 ease-in-out`}
+                            >
+                                <AlertTitle className="flex items-center">
+                                    {matchResult === "yes" ? (
+                                        <CheckCircleIcon className="mr-2 h-4 w-4 text-green-600" />
+                                    ) : (
+                                        <XCircleIcon className="mr-2 h-4 w-4" />
+                                    )}
+                                    Verification Result
+                                </AlertTitle>
+                                <AlertDescription className={matchResult === "yes" ? "text-green-800" : ""}>
+                                    {matchResult === "yes"
+                                        ? "Ticket verified successfully!"
+                                        : "Ticket not found or invalid."}
+                                </AlertDescription>
+                            </Alert>
+                            {qrData && (
+                                <div className="mt-4">
+                                    <h3 className="font-semibold">Scanned Data:</h3>
+                                    <p className="text-sm text-gray-600">{qrData}</p>
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                )}
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {activeTab === 'qr' && (
@@ -287,36 +317,7 @@ export default function Component() {
                         </Card>
                     )}
 
-                    {matchResult && (
-                        <Card className="shadow">
-                            <CardContent className="pt-6">
-                                <Alert
-                                    variant={matchResult === "yes" ? "default" : "destructive"}
-                                    className={`${matchResult === "yes" ? "bg-green-100 border-green-400" : ""} transition-all duration-300 ease-in-out`}
-                                >
-                                    <AlertTitle className="flex items-center">
-                                        {matchResult === "yes" ? (
-                                            <CheckCircleIcon className="mr-2 h-4 w-4 text-green-600" />
-                                        ) : (
-                                            <XCircleIcon className="mr-2 h-4 w-4" />
-                                        )}
-                                        Verification Result
-                                    </AlertTitle>
-                                    <AlertDescription className={matchResult === "yes" ? "text-green-800" : ""}>
-                                        {matchResult === "yes"
-                                            ? "Ticket verified successfully!"
-                                            : "Ticket not found or invalid."}
-                                    </AlertDescription>
-                                </Alert>
-                                {qrData && (
-                                    <div className="mt-4">
-                                        <h3 className="font-semibold">Scanned Data:</h3>
-                                        <p className="text-sm text-gray-600">{qrData}</p>
-                                    </div>
-                                )}
-                            </CardContent>
-                        </Card>
-                    )}
+
                 </div>
             </div>
             <footer className="bg-gray-100 py-4 text-center text-sm text-gray-600">
