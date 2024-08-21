@@ -8,12 +8,19 @@ import { cn, convertTo12HourFormat, formatDate } from "@/lib/utils";
 import Footer from "../../(components)/footer";
 import Image from "next/image";
 import QRCodeGenerator from "../../(components)/qrcode-generator";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Ticket({ params }: QueryProps) {
   const ticketID = params.ticket_id;
   const { data:attendee, isLoading } = useGetPublicTicket(ticketID);
   console.log({attendee});
-  
+  const router = useRouter();
+
+  const handleDownload = (ticketID: string) => {
+    const printTicketUrl = `/print-ticket/${ticketID}`;
+    window.open(printTicketUrl, '_blank');
+  };
   return (
     <>
       <Header />
@@ -23,7 +30,7 @@ export default function Ticket({ params }: QueryProps) {
         </section>
         {isLoading?
           (<Loading />):
-          (<TicketDetail attendee={attendee as FetchedPublicAttendeesProps} />)
+          (<TicketDetail attendee={attendee as FetchedPublicAttendeesProps} ticketID = {ticketID} onDownload={handleDownload}/>)
         }
       </main>
       <Footer />
@@ -37,10 +44,14 @@ const Loading = () => (
   </div>
 )
 
-const TicketDetail = ({attendee}:{attendee: FetchedPublicAttendeesProps}) => {
+
+
+
+const TicketDetail = ({attendee, ticketID, onDownload}:{attendee: FetchedPublicAttendeesProps, ticketID: string , onDownload: (ticketID: string) => void }) => {
   const { full_name, email, ticket_code, tickets } = attendee;
   const { name: ticketName, events } = tickets;
   const { id, name, headline, banner, event_date, start_at } = events;
+  
 
   return (
     <>
@@ -51,6 +62,9 @@ const TicketDetail = ({attendee}:{attendee: FetchedPublicAttendeesProps}) => {
             <DetailCard header="Email" className="text-xs" value={email} />
             <DetailCard header="Ticket Code" className="text-xs" value={ticket_code} />
             <DetailCard header="Ticket Name"className="text-xs" value={ticketName} />
+            <div className="w-full pt-4 flex-center">
+              <Button onClick={() => onDownload(ticketID)}>Download Ticket (PDF)</Button>
+            </div>
           </div>
           <div className="flex-1 h-full flex_center justify-start md:justify-center">
             <QRCodeGenerator value={ticket_code} size={200} />

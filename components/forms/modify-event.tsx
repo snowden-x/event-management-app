@@ -153,7 +153,7 @@ export function ModifyEventForm({eventID, className}:{eventID:string, className?
                     <TextInput name="headline" label="Headline" />
                     <SelectInput name="category" label="Category" placeHolder="Select a category" defaultvalue={event?.category} list={EVENT_CATEGORIES} />
                     <NumberInput name="capacity" label="Capacity" placeHolder="Total Capacity" min={event?.used_capacity || 25} showError />
-                    <TextInput name="tags" label="Tags ( #cool, #free, #awesome )" />
+                    <TextInput name="tags" label="Tags ( Tech, Finance, Coding, Debate )" />
                     <RadioGroupInput name="event_type" label="Event Type" defaultValue={event?.event_type} options={EVENT_TYPE_OPTIONS} />
                     <TextareaInput name="about" label="About This Event" />
                     <DateInput name="event_date" label="Event Date" showError/>

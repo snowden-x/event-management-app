@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useController } from "react-hook-form";
@@ -16,6 +17,8 @@ import { Switch } from "../ui/switch";
 import { useBookTicket, useGetAuthProfile, useGetBookableTickets } from "@/lib/query-hooks";
 import SpinnerIcon from "../icons/spinner-icon";
 import { FetchedAttendeeProps, FetchedBookableTicketProps } from "@/lib/types";
+import { useRouter } from 'next/navigation';
+import DownloadButton from '../common/download-button';
 
 const FormSchema = z.object({
     event_id: z.string().min(1, "Must include the event"),
@@ -34,6 +37,7 @@ export default function HandleTicketBookingForm({ eventID }: { eventID: string }
     const { data: profile, isLoading: authLoading } = useGetAuthProfile();
     const { data: bookableTickets, isLoading } = useGetBookableTickets(eventID);
     const { mutate: bookTicket, isError, isSuccess, isPending, data } = useBookTicket();
+    const router = useRouter();
 
     const form = useForm<HandleTicketBooking>({
         resolver: zodResolver(FormSchema),
@@ -66,32 +70,10 @@ export default function HandleTicketBookingForm({ eventID }: { eventID: string }
             toast.success("Ticket booked successfully");
             setTab("success");
             setCreatedAttendee(data);
-            
+
         }
     }, [isError, isSuccess, data]);
 
-    const generateTicket = () => {
-        if (!createdAttendee) return;
-
-        const doc = new jsPDF();
-
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(24);
-        doc.text("Event Ticket", 105, 20, { align: "center" });
-
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(12);
-        doc.text(`Name: ${createdAttendee.full_name}`, 20, 40);
-        doc.text(`Email: ${createdAttendee.email}`, 20, 50);
-        doc.text(`Ticket ID: ${createdAttendee.ticket_code}`, 20, 60);
-        doc.text(`Event ID: ${eventID}`, 20, 70);
-
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "italic");
-        doc.text("Thank you for booking!", 105, 90, { align: "center" });
-
-        doc.save(`ticket_${createdAttendee.ticket_code}.pdf`);
-    };
 
     if (isLoading || authLoading) {
         return (
@@ -140,7 +122,7 @@ export default function HandleTicketBookingForm({ eventID }: { eventID: string }
                             <p className="text-lg font-normal text-muted-foreground text-center">You are attending this event</p>
                         </div>
                         <div className="w-full pt-4 flex_center">
-                            <Button type="button" onClick={generateTicket}>Download your ticket (PDF)</Button>
+                            <DownloadButton attendee={createdAttendee} />
                         </div>
                     </CustomTabContent>
                 </form>

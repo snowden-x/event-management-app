@@ -132,7 +132,7 @@ export default function NewEventForm({closeHandler, organisationID, className}:N
                     <RadioGroupInput name="event_type" label="Event Type" options={EVENT_TYPE_OPTIONS} />
                     <SelectInput name="category" label="Category" placeHolder="Select a category" list={EVENT_CATEGORIES} />
                     <NumberInput name="capacity" label="Capacity" placeHolder="Total Capacity" min={25} showError />
-                    <TextInput name="tags" label="Tags ( #cool, #free, #awesome )" placeHolder="Seperate tag by a comma" />
+                    <TextInput name="tags" label="Tags ( Tech, Finance, Coding, Debate  )" placeHolder="Seperate tag by a comma" />
                     <DateInput name="event_date" label="Event Date" showError />
                     <TimeInput name="start_at" label="Starting Time" showError />
                     <TimeInput name="end_at" label="Ending Time" showError />

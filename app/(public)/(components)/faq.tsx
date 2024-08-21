@@ -48,9 +48,9 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
   );
 };
 
-const FAQSection = () => {
+export const FAQSection = () => {
   return (
-    <section className="main_container py-20 bg-gradient-to-b from-background to-background-alt">
+    <section id="faq-section" className="main_container py-20 bg-gradient-to-b from-background to-background-alt">
       <div className="sub_container max-w-3xl mx-auto">
         <h2 className="font-bold text-3xl text-center mb-2">Frequently Asked Questions</h2>
         <p className="text-muted-foreground text-center mb-12">Find answers to common questions about Connect</p>

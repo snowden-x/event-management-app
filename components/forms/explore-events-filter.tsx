@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
@@ -6,7 +7,7 @@ import { EVENT_CATEGORIES } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { TextInput } from "@/components/common/custom-form-fields";
 import { useForm } from "react-hook-form";
-import { Search, X } from "lucide-react";
+import { Search, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const FormSchema = z.object({
     search: z.string(),
@@ -15,13 +16,16 @@ const FormSchema = z.object({
 
 export type ExploreEventsFilter = z.infer<typeof FormSchema>;
 
-export default function ExploreEventsFilterForm({
+export default function Component({
     className,
     onFilterApply
 }: {
     className?: string;
     onFilterApply: (data: ExploreEventsFilter) => void;
 }) {
+    const [showAllCategories, setShowAllCategories] = useState(false);
+    const INITIAL_CATEGORY_COUNT = 5;
+
     const form = useForm<ExploreEventsFilter>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -52,6 +56,10 @@ export default function ExploreEventsFilterForm({
         onFilterApply({ search: '', categories: [] });
     };
 
+    const visibleCategories = showAllCategories 
+        ? EVENT_CATEGORIES 
+        : EVENT_CATEGORIES.slice(0, INITIAL_CATEGORY_COUNT);
+
     return (
         <Form {...form}>
             <form onSubmit={handleSubmit(onSubmit)} className={cn("w-full space-y-4", className)}>
@@ -76,19 +84,42 @@ export default function ExploreEventsFilterForm({
                         </Button>
                     )}
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    {EVENT_CATEGORIES.map(category => (
+                <div className="space-y-2">
+                    <div className="flex flex-wrap gap-2">
+                        {visibleCategories.map(category => (
+                            <Button
+                                key={category.value}
+                                type="button"
+                                className="rounded-full text-xs"
+                                variant={categories.includes(category.value) ? "default" : "outline"}
+                                size="xs"
+                                onClick={() => handleCategoryToggle(category.value)}
+                            >
+                                {category.label}
+                            </Button>
+                        ))}
+                    </div>
+                    {EVENT_CATEGORIES.length > INITIAL_CATEGORY_COUNT && (
                         <Button
-                            key={category.value}
                             type="button"
-                            className="rounded-full text-xs"
-                            variant={categories.includes(category.value) ? "default" : "outline"}
-                            size="xs"
-                            onClick={() => handleCategoryToggle(category.value)}
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowAllCategories(!showAllCategories)}
+                            className="text-xs"
                         >
-                            {category.label}
+                            {showAllCategories ? (
+                                <>
+                                    <ChevronUp className="h-4 w-4 mr-1" />
+                                    Show Less
+                                </>
+                            ) : (
+                                <>
+                                    <ChevronDown className="h-4 w-4 mr-1" />
+                                    Show More
+                                </>
+                            )}
                         </Button>
-                    ))}
+                    )}
                 </div>
                 {(searchValue || categories.length > 0) && (
                     <Button type="button" variant="outline" size="sm" onClick={handleReset}>

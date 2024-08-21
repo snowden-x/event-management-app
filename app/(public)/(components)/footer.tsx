@@ -1,7 +1,7 @@
 "use client";
 
 import Logo from "@/components/common/logo";
-import { _dashboard, _dashboardTickets, _events, _tickets, _about, _termsandconditions, _cookies } from "@/lib/routes";
+import { _dashboard, _dashboardTickets, _events, _tickets, _about, _terms, _cookies } from "@/lib/routes";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetDescription, SheetClose, SheetFooter, SheetTitle } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
@@ -32,8 +32,8 @@ const footerLinks = [
     {
         title: "legal",
         links: [
-            { name: "privacy policy", link: `${_termsandconditions}#privacy-policy` },
-            { name: "terms", link: _termsandconditions },
+            { name: "privacy policy", link: _terms },
+            { name: "terms", link: _terms },
             { name: "cookies", link: _cookies },
         ]
     },

@@ -10,7 +10,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
         { children }
       </main>
       <footer className="fixed bottom-0 left-0 w-full h-16 flex_center">
-        <p className="text-sm font-medium">CampusEvents &copy; 2024</p>
+        <p className="text-sm font-medium">Connect &copy; 2024</p>
       </footer>
     </>
   );
