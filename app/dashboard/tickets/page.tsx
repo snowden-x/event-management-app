@@ -13,7 +13,7 @@ export default async function DashboardTickets() {
             <h2 className="text-lg ml-8 lg:ml-2 md:ml-2 font-medium capitalize">Tickets</h2>
           </div>
         </header>
-        <div className="mx-6">
+        <div className="mx-3 lg:mx-6">
           <MyTicketContainer />
         </div>
 

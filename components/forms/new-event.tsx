@@ -101,13 +101,13 @@ export default function NewEventForm({closeHandler, organisationID, className}:N
 
     useEffect(() => {
         if (isError) {
-            toast.error("Error occurred creating organisation");
+            toast.error("Error occurred creating event");
             console.log(error);
             
         };
 
         if (isSuccess) {
-            toast.success("Organisation created successfully");
+            toast.success("Event created successfully");
             closeHandler();
         }
 

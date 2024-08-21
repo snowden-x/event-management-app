@@ -19,7 +19,7 @@ export default async function DashboardOrganisations({ searchParams }: QueryProp
         </div>
         <NewOrganisationHandler isOpen={isOrgFormOpen} />
       </header>
-      <div className="mx-6">
+      <div className="mx-2 lg:mx-6">
         <OrganisationsContainer />
       </div>
     </>

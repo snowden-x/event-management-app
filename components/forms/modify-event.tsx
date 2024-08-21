@@ -48,7 +48,7 @@ const ModifyEventFormSchema = z.object({
         description: z.string()
     })).nullable(),
     event_date: z.string()
-    .refine(value => !isNaN(Date.parse(value)), "Invalid date format (YYYY-MM-DD)")
+    .refine(value => !isNaN(Date.parse(value)), "Invalid date format (DD-MM-YYYY)")
     .refine((value) => {
         const date = new Date(value)
         date.setHours(0, 0, 0, 0);

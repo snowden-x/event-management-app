@@ -9,19 +9,7 @@ import Footer from '../(components)/footer'
 import Header from '../(components)/header'
 
 export default function TermsandConditions() {
-  const [progress, setProgress] = useState(0)
-  const [showConfetti, setShowConfetti] = useState(false)
 
-  const incrementProgress = () => {
-    setProgress(prev => {
-      const newProgress = prev + 10
-      if (newProgress >= 100) {
-        setShowConfetti(true)
-        setTimeout(() => setShowConfetti(false), 3000)
-      }
-      return Math.min(newProgress, 100)
-    })
-  }
 
   return (
     <>
@@ -30,8 +18,6 @@ export default function TermsandConditions() {
         <h1 className="text-3xl font-medium mb-6 text-center">Our  Policies</h1>
         <p className="mb-4 text-center">We promise to make this as painless as possible. Let's dive in!</p>
 
-        <Progress value={progress} className="mb-4" />
-        <p className="text-sm text-center mb-6">Progress: {progress}%</p>
 
         <Tabs defaultValue="privacy" className="mb-6">
           <TabsList className="grid w-full grid-cols-2">
@@ -51,7 +37,6 @@ export default function TermsandConditions() {
                     <li>Your email (for important stuff, not spam, we promise!)</li>
                     <li>Your favorite color (just kidding, we don't need that)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I understand</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -66,7 +51,6 @@ export default function TermsandConditions() {
                     <li>Improve your experience (we're always learning!)</li>
                     <li>Send you important updates (no spam, we hate it too)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">Got it!</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -81,7 +65,6 @@ export default function TermsandConditions() {
                     <li>Regular security audits (we're always on guard)</li>
                     <li>Limited access (only the cool kids can see it)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">Feeling secure!</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -96,7 +79,6 @@ export default function TermsandConditions() {
                     <li>If the law says we must (we're law-abiding citizens)</li>
                     <li>If you say it's okay (you're the boss!)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I'm okay with this</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -111,7 +93,6 @@ export default function TermsandConditions() {
                     <li>Update your info (people change, we get it)</li>
                     <li>Delete your account (we'll be sad to see you go)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I feel empowered!</Button>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -129,7 +110,6 @@ export default function TermsandConditions() {
                     <li>They protect both you and us (it's a win-win!)</li>
                     <li>They're actually important (we know, shocking!)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I get the gist</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -145,7 +125,6 @@ export default function TermsandConditions() {
                     <li>Follows our community guidelines (be nice!)</li>
                     <li>Doesn't live in a country we're not allowed to operate in (blame geopolitics)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I qualify!</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -160,7 +139,6 @@ export default function TermsandConditions() {
                     <li>You must follow our rules (they're reasonable, we promise)</li>
                     <li>You're responsible for your account (don't let your dog post for you)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I'll be responsible</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -175,7 +153,6 @@ export default function TermsandConditions() {
                     <li>You can stop using our service anytime (we'll miss you!)</li>
                     <li>We may update these terms (we'll let you know)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">Understood!</Button>
                 </AccordionContent>
               </AccordionItem>
 
@@ -190,7 +167,6 @@ export default function TermsandConditions() {
                     <li>We may remove content that breaks the rules</li>
                     <li>In serious cases, we may take legal action (but let's not go there)</li>
                   </ul>
-                  <Button onClick={incrementProgress} className="mt-4">I'll play nice</Button>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -198,18 +174,11 @@ export default function TermsandConditions() {
         </Tabs>
 
         <div className="text-center">
-          <Button className="mb-4" onClick={() => setProgress(0)}>Reset Progress</Button>
           <p className="text-sm hidden mb-2">Questions? We've got answers!</p>
           <Button className="hidden" variant="outline">
             <HelpCircle className="mr-2" /> Contact Us
           </Button>
         </div>
-
-        {showConfetti && (
-          <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
-            <div className="text-4xl">🎉</div>
-          </div>
-        )}
       </div>
       <Footer></Footer>
     </>

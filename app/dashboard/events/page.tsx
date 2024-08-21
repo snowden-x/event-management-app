@@ -19,7 +19,7 @@ export default async function DashboardEvents({ searchParams }: QueryProps) {
         </div>
         <NewEventHandler isOpen={isEventFormOpen} />
       </header>
-      <div className="mx-6">
+      <div className="mx-2 lg:mx-6">
         <EventsContainer />
       </div>
 

@@ -121,13 +121,13 @@ export const getEventByID = async ({id}:{id:string}) => {
 export const setEvent = async ({eventData}:{eventData: NewEvent}) => {
     const supabase = createClient();
     const { data: { user }} = await supabase.auth.getUser();
-    let {organisation_id, name, headline, capacity, event_type, category, tags, event_date, start_at, end_at, location, banner} = eventData;
+    let {organisation_id, name, headline, capacity, about, event_type, category, tags, event_date, start_at, end_at, location, banner} = eventData;
     if (!user) throw new Error('No user logged in');
 
     const { error } = await supabase
         .from('events')
         .insert({
-            name, organisation_id, capacity, category, headline, about: '', event_type,
+            name, organisation_id, capacity, category, headline, about, event_type,
             organiser: user.id,
             tags: stringToList(tags),
             event_date, start_at, end_at, location, banner
@@ -596,7 +596,7 @@ export const getSearchedTickets = async ({searchData}: { searchData: string}) =>
                 )
             )
         `)
-        .or(`full_name.ilike.%${searchData}%,email.ilike.%${searchData}%`);
+        .or(`ticket_code.ilike.%${searchData}%,email.ilike.%${searchData}%`);
 
     if (error) throw error;
 
