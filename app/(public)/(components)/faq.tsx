@@ -17,7 +17,7 @@ const faqData = [
   },
   {
     question: "How do attendees access their tickets?",
-    answer: "After purchasing, attendees are given the option to print their ticket. They can also access their tickets through their Connect account or from 'Find Ticket' using their email or ticket code."
+    answer: "After booking, attendees are given the option to print their ticket. They can also access their tickets through their Connect account or from 'Find Ticket' using their email or ticket code."
   },
   {
     question: "Is there a mobile app for Connect?",

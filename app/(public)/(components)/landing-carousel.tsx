@@ -16,7 +16,7 @@ import Image from "next/image";
 export const AutoplayCarousel = () => {
     const [api, setApi] = useState<CarouselApi | undefined>();
     const [current, setCurrent] = useState(0);
-    const images = [LandingImage, LandingImage2, LandingImage3, LandingImage4];
+    const images = [LandingImage4, LandingImage2, LandingImage3, LandingImage];
 
     useEffect(() => {
         if (!api) {
@@ -55,7 +55,7 @@ export const AutoplayCarousel = () => {
                         <div className="relative w-full h-full aspect-video">
                             <Image
                                 alt={`carousel-image-${index + 1}`}
-                                className="rounded-lg shadow object-cover"
+                                className={`rounded-lg shadow object-cover object-left-top ${image === LandingImage3 ? 'object-right-bottom' : ''}`}
                                 src={image}
                                 fill
                             />

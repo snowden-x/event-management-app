@@ -6,7 +6,7 @@ import Header from "./header"
 import FeaturesSection from "./features-section"
 import FAQSection from "./faq"
 import Footer from "./footer"
-import ConnectImg from "@/public/connect.png";
+import ConnectImg from "@/public/about.jpg";
 import Image from "next/image"
 import { _dashboardEvents } from "@/lib/routes";
 import Link from "next/link";
