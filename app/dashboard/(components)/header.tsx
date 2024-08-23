@@ -85,7 +85,7 @@ export default function Sidepanel() {
         <>
             <div className="flex items-center mb-5">
                 <Logo className='hidden' />
-                <span className="ml-2 text-xl text-center text-primary font-semibold">CONNECT</span>
+                <Link href="/" className="ml-2 text-xl text-center text-primary font-semibold">CONNECT</Link>
             </div>
 
             <div className="mb-6">

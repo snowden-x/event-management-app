@@ -48,8 +48,6 @@ export default function EventDetailContainer({ eventID }: { eventID: string }) {
                 <TabsList className="w-full h-auto py-4 bg-background border-b">
                     <div className="sub_container flex items-start justify-start">
                         <TabsTrigger value="overview">Overview</TabsTrigger>
-                        <TabsTrigger value="agenda">Agenda</TabsTrigger>
-                        <TabsTrigger value="faqs">FAQS</TabsTrigger>
                     </div>
                 </TabsList>
                 <TabsContent value="overview">
@@ -86,7 +84,7 @@ export default function EventDetailContainer({ eventID }: { eventID: string }) {
                         </div>
                     </div>
                 </TabsContent>
-                <TabsContent value="agenda">
+                {/* <TabsContent value="agenda">
                     <div className="sub_container space-y-7 py-7">
                         <div className="w-full h-80 border rounded-lg border-dashed flex_center">
                             No Agenda
@@ -99,7 +97,7 @@ export default function EventDetailContainer({ eventID }: { eventID: string }) {
                             No Faqs
                         </div>
                     </div>
-                </TabsContent>
+                </TabsContent> */}
             </Tabs>
         </main>
     )

@@ -58,7 +58,7 @@ export default function Tickets() {
         </section>
         <section className="sub_container py-0">
           {
-            isLoading ?
+            isLoading && search !== "" ?
               (<Loading />) : search === "" ? null :
               searchedTickets && searchedTickets.length > 0 ?
                 (<SearchedTicketsContainer searchedTickets={searchedTickets} />) :

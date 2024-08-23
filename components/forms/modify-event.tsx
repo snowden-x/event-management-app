@@ -53,7 +53,7 @@ const ModifyEventFormSchema = z.object({
         const date = new Date(value)
         date.setHours(0, 0, 0, 0);
         return date > today;
-    }),
+    }, "The day must be after today"),
     banner: z.any()
     .refine((file) => {
       if (file.size === 0 || file.name === undefined) return false;
