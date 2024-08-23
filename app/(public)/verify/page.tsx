@@ -214,7 +214,7 @@ export default function Component() {
                     <CardContent className="mt-3">
                         <p className="text-sm text-gray-500">Event ID: {eventID}</p>
                         <p className="text-sm text-gray-500">Total Attendees: {attendees?.length || 0}</p>
-                        <p className="text-sm text-gray-500">Succesful Verifications: {successCount}</p>
+                        <p className="text-sm text-gray-500 hidden">Succesful Verifications: {successCount}</p>
                     </CardContent>
                 </Card>
 

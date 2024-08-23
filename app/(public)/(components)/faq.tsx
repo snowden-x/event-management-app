@@ -9,15 +9,15 @@ const faqData = [
   },
   {
     question: "How do I create an event?",
-    answer: "To create an event, log into your account, navigate to the dashboard, and click on 'Create Event'. Follow the step-by-step guide to input your event details, set up ticketing, and publish your event."
+    answer: "To create an event, log into your account, navigate to the dashboard, click on 'Events' and then 'New Event'. Follow the step-by-step guide to input your event details, set up ticketing, and publish your event."
   },
   {
     question: "Can I sell tickets through Connect?",
-    answer: "Yes! Connect offers integrated ticketing solutions. You can set up free or paid tickets, manage capacities, and track sales directly through our platform."
+    answer: "Not yet. We're working on that. Connect offers integrated ticketing solutions. Currently, you can set up free tickets, manage capacities, and track tickets directly through our platform."
   },
   {
     question: "How do attendees access their tickets?",
-    answer: "After purchasing, attendees receive an email with their digital ticket. They can also access their tickets through their Connect account. We support both print-at-home and mobile ticket options."
+    answer: "After purchasing, attendees are given the option to print their ticket. They can also access their tickets through their Connect account or from 'Find Ticket' using their email or ticket code."
   },
   {
     question: "Is there a mobile app for Connect?",

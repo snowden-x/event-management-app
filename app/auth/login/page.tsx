@@ -3,9 +3,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata:Metadata = {
-  title: "CampEvents - Login",
-  description: "Login into CampusEvents now",
-  keywords: ["CampusEvents", "Login to CampusEvents"]
+  title: "Connect - Login",
+  description: "Login into Connect now",
+  keywords: ["Connect", "Login to Connect"]
 };
 
 export default function Login() {

@@ -34,7 +34,7 @@ const EventCard = ({ id, name, headline, banner, event_date, start_at, about }: 
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-overlay-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 md:block hidden" />
         </Link>
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-overlay-dark md:bg-transparent md:transform md:translate-y-full md:group-hover:translate-y-0 transition-all duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-overlay-dark bg-black/60 md:transform md:translate-y-full md:group-hover:translate-y-0 transition-all duration-300">
           <p className="text-sm font-medium mb-1 flex items-center">
             <Tag className="size-4 mr-2 text-white" />
             <span className="capitalize font-roboto-mono">{headline}</span>

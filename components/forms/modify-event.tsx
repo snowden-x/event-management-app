@@ -159,7 +159,7 @@ export function ModifyEventForm({eventID, className}:{eventID:string, className?
                     <DateInput name="event_date" label="Event Date" showError/>
                     <TimeInput name="start_at" label="Starting Time" showError />
                     <TimeInput name="end_at" label="Ending Time" showError />
-                    <SelectInput name="location.school" label="School" placeHolder={event?.location.school} list={SCHOOLS}/>
+                    <SelectInput name="location.school" label="School" defaultvalue={event?.location.school} list={SCHOOLS}/>
                     <TextInput name="location.name" label="Location (ie. kumaplay auditorium)" />
                     <TextareaInput name="location.description" label="Location Guide (ie. around engineering campus)" />
                     <ImageInput name="banner" label="Banner" />

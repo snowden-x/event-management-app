@@ -58,10 +58,10 @@ const TicketDetail = ({attendee, ticketID, onDownload}:{attendee: FetchedPublicA
       <TicketDetailComponent header="Ticket Holder Information">
         <div className="w-full flex gap-6 md:gap-4 flex-col md:flex-row">
           <div className="flex-1 grid grid-cols-2 gap-y-6">
-            <DetailCard header="Full Name" value={full_name} className="overflow-hidden truncate text-xs" />
+            <DetailCard header="Full Name" value={full_name} className="overflow-hidden capitalize truncate text-xs" />
             <DetailCard header="Email" className="text-xs" value={email} />
             <DetailCard header="Ticket Code" className="text-xs" value={ticket_code} />
-            <DetailCard header="Ticket Name"className="text-xs" value={ticketName} />
+            <DetailCard header="Ticket Name"className="text-xs capitalize" value={ticketName} />
             <div className="w-full pt-4 flex-center">
               <Button onClick={() => onDownload(ticketID)}>Download Ticket (PDF)</Button>
             </div>
@@ -77,8 +77,8 @@ const TicketDetail = ({attendee, ticketID, onDownload}:{attendee: FetchedPublicA
             <Image src={banner} alt={name} fill className="w-full object-cover rounded-lg" />
           </div>
           <div className="flex-1 space-y-4">
-            <DetailCard header="Event Name" value={name} />
-            <DetailCard header="Headline" value={headline} />
+            <DetailCard header="Event Name" value={name} className="capitalize" />
+            <DetailCard header="Headline" value={headline} className="capitalize"/>
             <DetailCard header="Event Date" value={formatDate(event_date)} />
             <DetailCard header="Event Time" value={convertTo12HourFormat(start_at)} />
           </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import SpinnerIcon from "@/components/icons/spinner-icon";
-import EventCard from "./event-card";
+import EventCard from "./event-card-v";
 import { ArchiveX } from "lucide-react";
 import { useGetPublicEvents } from "@/lib/query-hooks";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -58,7 +58,7 @@ export default function EevntsContainerV() {
             <ExploreEventsFilterForm onFilterApply={handleFilterApply} />
             <ScrollArea className="h-[calc(100vh-20px)] ">
                 {filteredEvents && filteredEvents.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:my-20 mx-2 lg:mx-9 ">
+                    <div className="grid mx-7 grid-cols-1 lg:grid-cols-3 gap-4 md:grid-cols-2 lg:my-20 lg:mx-1">
                         {filteredEvents.map((event) => (
                             <EventCard capacity={0} created_at={''} event_status={''} event_type={''} is_published={false} organisation_id={''} organiser={''} tickets={[]} updated_at={''} agenda={null} faq={null} key={event.id} {...event} />
                         ))}

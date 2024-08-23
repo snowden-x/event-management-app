@@ -36,3 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 old schema.txt
+
+#supabase
+/supabase/
+

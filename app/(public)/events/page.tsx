@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export default async function Events() {
   return (
     <>
-      <div className="bg-image">
+      <div className="bg-gray-200/40 dark:bg-zinc-800/40">
         <Header />
         <main className="main_container events_page_h bg-transparent ">
           <div className="sub_container flex min-h-full py-7 gap-5">

@@ -27,7 +27,10 @@ export default function Layout({ children, params }: LayoutProps) {
 
       </header>
       <BodyNavigation navigationList={navigationList} />
-      {children}
+      <div className="lg:ml-11 ml-2">
+        {children}
+      </div>
+
     </>
   );
 }

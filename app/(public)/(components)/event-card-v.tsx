@@ -30,7 +30,7 @@ const EventCard = ({ id, name, headline, banner, event_date, start_at, location,
     const formattedMonth = new Date(event_date).toLocaleDateString('en-US', { month: 'short' });
 
     return (
-        <div className="group border w-[300px] rounded-xl shadow-lg overflow-hidden flex-shrink-4 bg-background transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
+        <div className="group border w-[320px] rounded-xl shadow-lg overflow-hidden flex-shrink-4 bg-background transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
             <div className="relative w-full aspect-video overflow-hidden">
                 <Link href={_event(id)} className="block w-full h-full">
                     {banner ? (

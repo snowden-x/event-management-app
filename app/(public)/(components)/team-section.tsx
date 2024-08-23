@@ -19,67 +19,67 @@ const TeamSection = () => {
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Tengue Delali Precious</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Bossman</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Kojo Nhyira Mante-Darkwa</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Director.</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-t md:border-gray-200 dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Bennett Kofi Okyere Aboagye</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Deputy Director</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Okantey Gideon Nii Okaitey</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300">Mandem</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Akorful Jeffery Adu Quaye</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Bossman-in-crime</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Amponsah Nathaniel</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">CEO</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Afrim Prince Gabriel</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Co-Founder</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Danu Jeffery Selassie</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Kube Wura</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Menson John Asare</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">SonOfMan</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Nkrumah Charles Nhyira</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Mandem-sama</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
 
                     <div className="md:p-8 lg:p-14 md:border-l md:border-gray-200 md:border-t dark:md:border-gray-700">
                         <UserIcon className="mx-auto text-gray-900 dark:text-gray-100"></UserIcon>
                         <h3 className="mt-12 text-xl font-medium text-gray-900 dark:text-gray-100 font-roboto-mono">Koomson Arnon Kobina Acquah</h3>
-                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Boss</p>
+                        <p className="mt-5 text-base text-gray-600 dark:text-gray-300 font-pj">Developer</p>
                     </div>
                 </div>
             </div>

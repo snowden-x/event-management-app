@@ -27,6 +27,9 @@ const config = {
         "screen-3xl": "1920px",
       },
       colors: {
+        beige: '#c3a68b',
+        wine:'#7c2c3b',
+        beigeshade:'#f7f1eb',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

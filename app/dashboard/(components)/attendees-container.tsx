@@ -19,6 +19,7 @@ export default function AttendeesContainer({eventID}:{eventID: string}) {
 
     return (
         <BodyContent>
+            <p className="mb-5 border-b border-dashed"><span className="font-medium text-lg">Event ID: </span>{eventID}</p>
             <DataTable columns={columns} data={attendees ?? []} />
         </BodyContent>
     )

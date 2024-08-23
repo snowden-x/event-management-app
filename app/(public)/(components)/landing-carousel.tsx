@@ -1,10 +1,9 @@
 "use client";
-import LandingImage from "@/public/dddepth-150.jpg";
-import LandingImage2 from "@/public/dddepth-171.jpg";
-import LandingImage3 from "@/public/dddepth-202.jpg";
-import LandingImage4 from "@/public/dddepth-236.jpg";
-import LandingImage5 from "@/public/dddepth-312.jpg";
-import LandingImage6 from "@/public/dddepth-242.jpg";
+import LandingImage from "@/public/landing1.jpg";
+import LandingImage2 from "@/public/landing2.jpg";
+import LandingImage3 from "@/public/landing3.jpg";
+import LandingImage4 from "@/public/landing4.jpg";
+
 import {
     Carousel,
     CarouselApi,
@@ -17,7 +16,7 @@ import Image from "next/image";
 export const AutoplayCarousel = () => {
     const [api, setApi] = useState<CarouselApi | undefined>();
     const [current, setCurrent] = useState(0);
-    const images = [LandingImage, LandingImage2, LandingImage3, LandingImage4, LandingImage5, LandingImage6];
+    const images = [LandingImage, LandingImage2, LandingImage3, LandingImage4];
 
     useEffect(() => {
         if (!api) {

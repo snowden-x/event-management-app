@@ -110,6 +110,8 @@
   }
 }
 
+/*
+
 .bg-image{
   background-repeat: repeat;
   background-size: contain;
@@ -119,3 +121,4 @@
 .dark .bg-image{
   background-image: url('/background-dark.svg');
 }
+*/
