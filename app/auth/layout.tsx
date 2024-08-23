@@ -1,10 +1,12 @@
 import Logo from "@/components/common/logo";
+import { _home } from "@/lib/routes";
+import Link from "next/link";
 
 export default function Layout({children}: {children: React.ReactNode}) {
   return (
     <>
       <header className="fixed top-0 left-0 w-full py-5 flex_center">
-        <Logo />
+       <Link href={_home}className="font-medium text-xl">CONNECT</Link>
       </header>
       <main className="w-full min-h-screen flex_center">
         { children }
